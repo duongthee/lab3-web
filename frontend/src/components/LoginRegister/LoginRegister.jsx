@@ -25,15 +25,20 @@ function LoginRegister() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ login_name: loginName, password: password }), // Include password
+        body: JSON.stringify({ login_name: loginName, password: password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
         console.log('Login successful:', data);
-        login(data); // Use login from AuthContext
-        navigate(`/users/${data._id}`); // Redirect to user detail page
+        // Store the token in the user data
+        const userData = {
+          ...data,
+          token: data.token // Make sure the token is included
+        };
+        login(userData); // Pass the user data with token to the login function
+        navigate(`/users/${data._id}`);
       } else {
         console.error('Login failed:', data.error);
         setMessage(`Login failed: ${data.error}`);

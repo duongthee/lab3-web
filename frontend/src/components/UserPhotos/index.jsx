@@ -181,37 +181,34 @@ function UserPhotos({ photoUploadTrigger }) {
                       </Typography>
                     )}
 
-                    {loggedInUser && loggedInUser._id === photo.user_id && (
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        size="small"
-                        onClick={() => handleDeletePhoto(photo._id)}
-                        sx={{ mt: 2 }}
-                      >
-                        Delete Photo
-                      </Button>
-                    )}
-
                     {loggedInUser && (
                       <div className="add-comment-section">
-                        <TextField
-                          label="Add a comment"
-                          variant="outlined"
-                          size="small"
-                          fullWidth
+                        <input
+                          type="text"
+                          placeholder="Add a comment"
                           value={newCommentText[photo._id] || ''}
                           onChange={(e) => handleCommentChange(photo._id, e.target.value)}
-                          sx={{ mt: 2, mb: 1 }}
+                          style={{ marginTop: 8, marginBottom: 8, width: '70%' }}
                         />
-                        <Button
-                          variant="contained"
-                          size="small"
+                        <button
                           onClick={() => handleAddComment(photo._id)}
                           disabled={!newCommentText[photo._id] || newCommentText[photo._id].trim() === ''}
+                          style={{ 
+                            marginLeft: 8,
+                            padding: '4px 8px',
+                            fontSize: '0.8rem',
+                            backgroundColor: '#e0e0e0',
+                            color: '#424242',
+                            border: '1px solid #bdbdbd',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease'
+                          }}
+                          onMouseOver={(e) => e.target.style.backgroundColor = '#d0d0d0'}
+                          onMouseOut={(e) => e.target.style.backgroundColor = '#e0e0e0'}
                         >
                           Add Comment
-                        </Button>
+                        </button>
                       </div>
                     )}
                   </CardContent>

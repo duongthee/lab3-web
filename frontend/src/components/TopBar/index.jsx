@@ -97,7 +97,7 @@ function TopBar({ onPhotoUpload }) {
     <AppBar className="topbar-appBar" position="absolute">
       <Toolbar>
         <Typography variant="h5" color="inherit">
-          Bùi Quang Anh
+          Mai Thế Dương
         </Typography>
         <Typography variant="h6" color="inherit" style={{ marginLeft: "auto" }}>
           {user ? `Hi ${user.first_name}` : "Please Login"}

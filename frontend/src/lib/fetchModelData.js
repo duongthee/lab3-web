@@ -6,7 +6,22 @@
  */
 async function fetchModel(url) {
   try {
-    const response = await fetch(url);
+    // Get the user data from localStorage
+    const userData = localStorage.getItem('user');
+    const headers = {};
+    
+    // If user data exists, add the authentication token to headers
+    if (userData) {
+      const user = JSON.parse(userData);
+      if (user.token) {
+        headers['Authorization'] = `Bearer ${user.token}`;
+      }
+    }
+
+    const response = await fetch(url, {
+      headers: headers
+    });
+    
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
